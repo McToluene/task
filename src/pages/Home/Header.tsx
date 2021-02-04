@@ -3,7 +3,6 @@ import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import { ArrowBack } from "@material-ui/icons";
 import { useLocation, useHistory } from "react-router-dom";
@@ -32,23 +31,27 @@ const Header: FunctionComponent = () => {
     history.goBack();
   };
 
+  const createName = (path: string): string => {
+    return path.replace("/", "");
+  };
+
   if (location.pathname !== "/home") {
     content = (
       <div>
         <AppBar position="static">
           <Toolbar>
             <IconButton
+              onClick={goBack}
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="menu"
             >
-              <ArrowBack onClick={goBack} />
+              <ArrowBack />
             </IconButton>
             <Typography variant="h6" className={classes.title} component="div">
-              News
+              {createName(location.pathname.toString())}
             </Typography>
-            <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
       </div>
